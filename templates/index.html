@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>LinkedIn CV Recomendation</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body>
+ <div class="login">
+	<h1>LinkedIn CV Recomendation</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('test_predict')}}"method="post">
+    	<h4>Job Summery</h5>
+    	<textarea rows="4" cols="50" form_id='a' name=j_s' placeholder='Please provide your Job Summery'></textarea>
+    	<b></b>
+    	<h4>Top Skills</h5>
+    	<textarea rows="4" cols="50" form_id='b' name='t_s' placeholder='Please provide your Top Skills'></textarea>
+    	<b></b>
+    	<h4>Experience</h5>
+    	<textarea rows="4" cols="50" form_id='c' name='ex' placeholder='Please provide your Experience'></textarea>
+    	<b></b>
+    	<p></p>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+   <br>
+   <br>
+ 
+ </div>
+
+
+</body>
+</html>
