@@ -16,14 +16,11 @@
 	<h1>Top listed CV Recomendation:</h1>
 
 <table>
-<tr><td>Profile Name</td></tr>
- {% for post in user %}
-        
-  <tr><td>{{ post[0] }}</td></tr>
-  <tr><td>{{ post[1] }}</td></tr>
-  <tr><td>{{ post[2] }}</td></tr>
 
- {% endfor %}
+  {% for m in user %}      
+  <tr><td>{{ m }}</td></tr>
+
+  {% endfor %}
  </table>
  </div>
 
