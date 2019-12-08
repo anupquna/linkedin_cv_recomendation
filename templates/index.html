@@ -18,13 +18,13 @@
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('test_predict')}}" method="post">
     	<h4>Job Summery</h5>
-    	<textarea rows="4" cols="50" name="abcd"  placeholder='Please provide your Job Summery'></textarea>
+    	<textarea rows="4" cols="50" name="summery"  placeholder='Please provide your Job Summery'></textarea>
     	<b></b>
     	<h4>Top Skills</h5>
-    	<textarea rows="4" cols="50" form_id='b' name='t_s' placeholder='Please provide your Top Skills'></textarea>
+    	<textarea rows="4" cols="50" name="skill" placeholder='Please provide your Top Skills'></textarea>
     	<b></b>
     	<h4>Experience</h5>
-    	<textarea rows="4" cols="50" form_id='c' name='ex' placeholder='Please provide your Experience'></textarea>
+    	<textarea rows="4" cols="50" name="experiance" placeholder='Please provide your Experience'></textarea>
     	<b></b>
     	<p></p>
         <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
