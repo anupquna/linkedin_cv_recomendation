@@ -50,21 +50,25 @@ def test_predict():
 	tfidf_matrix_experiance = tfidf_vectorizer.fit_transform(train_set_experiance)
 	
 	sval_summery=cosine_similarity(tfidf_matrix_summery[0:1], tfidf_matrix_summery)
-	lst = sval_summery[0][1:]
-	ddfff['cos_sim_summery']=lst
+	#lst = sval_summery[0][1:]
+	#ddfff['cos_sim_summery']=lst
 	
 	
 	sval_skill=cosine_similarity(tfidf_matrix_skill[0:1], tfidf_matrix_skill)
-	lst = sval_skill[0][1:]
-	ddfff['cos_sim_skill']=lst
+	#lst = sval_skill[0][1:]
+	#ddfff['cos_sim_skill']=lst
 	
 	
 	sval_experiance=cosine_similarity(tfidf_matrix_experiance[0:1], tfidf_matrix_experiance)
-	lst = sval_experiance[0][1:]
-	ddfff['cos_sim_experiance']=lst
+	#lst = sval_experiance[0][1:]
+	#ddfff['cos_sim_experiance']=lst
 	
-	ddfff.drop(['Unnamed: 0','Top_Skills','Summary','Experience'],axis=1,inplace=True)
-	ddfff.sort_values(['cos_sim_skill','cos_sim_summery', 'cos_sim_experiance'], axis = 0, ascending = False,inplace = True, na_position ='last') 
+	final_lst=(5*sval_summery[0][1:] + 3*sval_skill[0][1:]+2*sval_experiance[0][1:])/float(5+3+2)
+	ddfff['cos_sim_final']=final_lst
+	ddfff.sort_values(['cos_sim_final'], axis = 0, ascending = False,inplace = True, na_position ='last') 
+	
+	#ddfff.drop(['Unnamed: 0','Top_Skills','Summary','Experience'],axis=1,inplace=True)
+	#ddfff.sort_values(['cos_sim_skill','cos_sim_summery', 'cos_sim_experiance'], axis = 0, ascending = False,inplace = True, na_position ='last') 
 	
 	#ddfff=ddfff.replace(0,np.nan).dropna(subset=['cos_sim_skill'])
 	k=list(enumerate(ddfff['Name'][0:11]))
