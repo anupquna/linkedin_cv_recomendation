@@ -17,6 +17,9 @@
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('test_predict')}}" method="post">
+    	<h4>Location</h5>
+    	<textarea rows="4" cols="50" name="place"  placeholder='Please provide your Location'></textarea>
+    	<b></b>
     	<h4>Job Summery</h5>
     	<textarea rows="4" cols="50" name="summery"  placeholder='Please provide your Job Summery'></textarea>
     	<b></b>
