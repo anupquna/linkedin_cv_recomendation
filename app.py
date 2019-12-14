@@ -17,10 +17,12 @@ def home():
 @app.route('/test_predict',methods=['GET', 'POST'])
 def test_predict():
 	summery = request.form['summery'] 
+	place = request.form['place'] 
 	skill = request.form['skill']
 	experiance = request.form['experiance']
 	
 	train_set_summery=[]
+	train_set_place=[]
 	train_set_skill=[]
 	train_set_experiance=[]
 	
@@ -31,11 +33,15 @@ def test_predict():
 	ddfff['Top_Skills'].fillna("No Skill", inplace = True) 
 	
 	train_set_summery.append(summery)
+	train_set_place.append(place)
 	train_set_skill.append(skill)
 	train_set_experiance.append(experiance)
 
 	for i in range(len(ddfff['Top_Skills'])):
 		train_set_skill.append(ddfff['Top_Skills'][i])
+		
+	for i in range(len(ddfff['Designation'])):
+		train_set_place.append(ddfff['Designation'][i])
 	
 	for i in range(len(ddfff['Summary'])):
 		train_set_summery.append(ddfff['Summary'][i])
@@ -46,13 +52,14 @@ def test_predict():
 
 	tfidf_vectorizer = TfidfVectorizer()
 	tfidf_matrix_summery = tfidf_vectorizer.fit_transform(train_set_summery)
+	tfidf_matrix_place = tfidf_vectorizer.fit_transform(train_set_place)
 	tfidf_matrix_skill = tfidf_vectorizer.fit_transform(train_set_skill)
 	tfidf_matrix_experiance = tfidf_vectorizer.fit_transform(train_set_experiance)
 	
 	sval_summery=cosine_similarity(tfidf_matrix_summery[0:1], tfidf_matrix_summery)
 	#lst = sval_summery[0][1:]
 	#ddfff['cos_sim_summery']=lst
-	
+	sval_place=cosine_similarity(tfidf_matrix_place[0:1], tfidf_matrix_place)
 	
 	sval_skill=cosine_similarity(tfidf_matrix_skill[0:1], tfidf_matrix_skill)
 	#lst = sval_skill[0][1:]
@@ -63,7 +70,7 @@ def test_predict():
 	#lst = sval_experiance[0][1:]
 	#ddfff['cos_sim_experiance']=lst
 	
-	final_lst=(5*sval_summery[0][1:] + 3*sval_skill[0][1:]+2*sval_experiance[0][1:])/float(5+3+2)
+	final_lst=(5*sval_place[0][1:]+4*sval_summery[0][1:] + 4*sval_skill[0][1:]+1*sval_experiance[0][1:])/float(10+5+3+2)
 	ddfff['cos_sim_final']=final_lst
 	ddfff.sort_values(['cos_sim_final'], axis = 0, ascending = False,inplace = True, na_position ='last') 
 	
@@ -71,7 +78,7 @@ def test_predict():
 	#ddfff.sort_values(['cos_sim_skill','cos_sim_summery', 'cos_sim_experiance'], axis = 0, ascending = False,inplace = True, na_position ='last') 
 	
 	#ddfff=ddfff.replace(0,np.nan).dropna(subset=['cos_sim_skill'])
-	k=list(enumerate(ddfff['Name'][0:11]))
+	k=list(enumerate(ddfff['Name'][0:10]))
 	
 	Prof_list = []
 	for i in range(len(k)):
